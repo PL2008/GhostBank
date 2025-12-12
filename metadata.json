@@ -1,0 +1,5 @@
+{
+  "name": "GhostBank",
+  "description": "A modern, secure, and sleek financial dashboard featuring dark mode aesthetics, real-time transaction simulation, and PIX payment integration.",
+  "requestFramePermissions": []
+}

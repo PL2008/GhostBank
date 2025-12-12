@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>GhostBank</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              ghost: {
+                50: '#f5f3ff',
+                100: '#ede9fe',
+                200: '#ddd6fe',
+                300: '#c4b5fd',
+                400: '#a78bfa',
+                500: '#8b5cf6',
+                600: '#7c3aed',
+                700: '#6d28d9',
+                800: '#5b21b6',
+                900: '#4c1d95',
+                950: '#2e1065',
+              },
+              darkbg: '#0f0f13',
+              cardbg: '#18181b',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+          },
+        },
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      // Função ROBUSTA para bloquear Zoom
+      (function() {
+        // 1. Bloquear gestos de trackpad/touchscreen (Pinch)
+        document.addEventListener('gesturestart', function(e) {
+          e.preventDefault();
+        });
+        document.addEventListener('gesturechange', function(e) {
+          e.preventDefault();
+        });
+        document.addEventListener('gestureend', function(e) {
+          e.preventDefault();
+        });
+
+        // 2. Bloquear Zoom com Teclado
+        document.addEventListener('keydown', function(event) {
+          if ((event.ctrlKey || event.metaKey) && 
+              (event.key === '+' || event.key === '-' || event.key === '=' || event.key === '0')) {
+            event.preventDefault();
+          }
+        });
+
+        // 3. Bloquear Double Tap (Toque duplo rápido)
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+          const now = (new Date()).getTime();
+          if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+          }
+          lastTouchEnd = now;
+        }, false);
+      })();
+    </script>
+    <style>
+      html, body {
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        overscroll-behavior: none;
+        /* Impede zoom nativo do navegador */
+        touch-action: pan-x pan-y;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #0f0f13;
+        color: #e4e4e7;
+      }
+
+      /* FIX CRÍTICO: Previne Zoom automático em inputs no iOS/Mobile */
+      /* Inputs com font-size < 16px causam zoom automático no iOS. Forçamos 16px. */
+      @media screen and (max-width: 768px) {
+        input, select, textarea {
+          font-size: 16px !important;
+          max-height: 50px; /* Evita layouts quebrados */
+        }
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #18181b; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #4c1d95; 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #6d28d9; 
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2.39.7"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
